@@ -403,6 +403,7 @@ export default class Options {
           barHeight: '70%', // should be in percent 0 - 100
           distributed: false,
           borderRadius: 0,
+          columnWidths: null,
           rangeBarOverlap: true,
           rangeBarGroupRows: false,
           colors: {
