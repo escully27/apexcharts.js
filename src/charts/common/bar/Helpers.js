@@ -48,7 +48,7 @@ export default class Helpers {
     }
   }
 
-  initialPositions() {
+  initialPositions(realIndex=null) {
     let w = this.w
     let x, y, yDivision, xDivision, barHeight, barWidth, zeroH, zeroW
 
@@ -118,6 +118,10 @@ export default class Helpers {
         }
       }
 
+      if (Array.isArray(this.barCtx.barOptions.columnWidth)) {
+        barWidth = this.barCtx.barOptions.columnWidth[realIndex]
+      }
+
       zeroH =
         w.globals.gridHeight -
         this.barCtx.baseLineY[this.barCtx.yaxisIndex] -
@@ -174,6 +178,7 @@ export default class Helpers {
 
     return pathFill
   }
+
 
   getStrokeWidth(i, j, realIndex) {
     let strokeWidth = 0
