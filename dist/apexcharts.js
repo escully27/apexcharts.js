@@ -6890,8 +6890,9 @@
               }));
               barWidth = this.series[i][j] / this.invertedYRatio;
             } else {
-              if (Array.isArray(this.ctx.barOptions.columnWidth)) {
-                barWidth = this.ctx.barOptions.columnWidth[j];
+              if (Array.isArray(this.barOptions.columnWidth)) {
+                barWidth = this.barOptions.columnWidth[j];
+                console.log(" bar width ", j, barWidth, this.barOptions);
               }
 
               paths = this.drawColumnPaths(_objectSpread2(_objectSpread2({}, pathsParams), {}, {
