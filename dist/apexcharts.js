@@ -6894,9 +6894,9 @@
               if (Array.isArray(this.barOptions.columnWidth)) {
                 barWidth = this.barOptions.columnWidth[j];
                 console.log(" bar width ", j, barWidth, this.barOptions);
-              }
+              } // barWidth = (10 * (j+1))
 
-              barWidth = 10 * (j + 1);
+
               console.log(" bar width ", j, barWidth, this.barOptions);
               paths = this.drawColumnPaths(_objectSpread2(_objectSpread2({}, pathsParams), {}, {
                 xDivision: xDivision,
