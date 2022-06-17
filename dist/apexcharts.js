@@ -6310,7 +6310,6 @@
     }, {
       key: "initialPositions",
       value: function initialPositions() {
-        var realIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
         var w = this.w;
         var x, y, yDivision, xDivision, barHeight, barWidth, zeroH, zeroW;
         var dataPoints = w.globals.dataPoints;
@@ -6366,10 +6365,6 @@
             if (barWidth < 1) {
               barWidth = 1;
             }
-          }
-
-          if (Array.isArray(this.barCtx.barOptions.columnWidth)) {
-            barWidth = this.barCtx.barOptions.columnWidth[realIndex];
           }
 
           zeroH = w.globals.gridHeight - this.barCtx.baseLineY[this.barCtx.yaxisIndex] - (this.barCtx.isReversed ? w.globals.gridHeight : 0) + (this.barCtx.isReversed ? this.barCtx.baseLineY[this.barCtx.yaxisIndex] * 2 : 0);
@@ -6847,7 +6842,7 @@
           }
 
           this.isReversed = w.config.yaxis[this.yaxisIndex] && w.config.yaxis[this.yaxisIndex].reversed;
-          var initPositions = this.barHelpers.initialPositions(realIndex);
+          var initPositions = this.barHelpers.initialPositions();
           y = initPositions.y;
           barHeight = initPositions.barHeight;
           yDivision = initPositions.yDivision;
@@ -6895,6 +6890,10 @@
               }));
               barWidth = this.series[i][j] / this.invertedYRatio;
             } else {
+              if (Array.isArray(this.ctx.barOptions.columnWidth)) {
+                barWidth = this.ctx.barOptions.columnWidth[j];
+              }
+
               paths = this.drawColumnPaths(_objectSpread2(_objectSpread2({}, pathsParams), {}, {
                 xDivision: xDivision,
                 barWidth: barWidth,

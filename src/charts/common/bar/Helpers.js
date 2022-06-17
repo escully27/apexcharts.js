@@ -118,10 +118,7 @@ export default class Helpers {
         }
       }
 
-      if (Array.isArray(this.barCtx.barOptions.columnWidth)) {
-        barWidth = this.barCtx.barOptions.columnWidth[realIndex]
-      }
-
+    
       zeroH =
         w.globals.gridHeight -
         this.barCtx.baseLineY[this.barCtx.yaxisIndex] -

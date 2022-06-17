@@ -108,7 +108,7 @@ class Bar {
         w.config.yaxis[this.yaxisIndex] &&
         w.config.yaxis[this.yaxisIndex].reversed
 
-      let initPositions = this.barHelpers.initialPositions(realIndex)
+      let initPositions = this.barHelpers.initialPositions()
 
       y = initPositions.y
       barHeight = initPositions.barHeight
@@ -160,6 +160,11 @@ class Bar {
           })
           barWidth = this.series[i][j] / this.invertedYRatio
         } else {
+
+          if (Array.isArray(this.ctx.barOptions.columnWidth)) {
+            barWidth = this.ctx.barOptions.columnWidth[j]
+          }
+
           paths = this.drawColumnPaths({
             ...pathsParams,
             xDivision,
