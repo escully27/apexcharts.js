@@ -6310,6 +6310,7 @@
     }, {
       key: "initialPositions",
       value: function initialPositions() {
+        var realIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
         var w = this.w;
         var x, y, yDivision, xDivision, barHeight, barWidth, zeroH, zeroW;
         var dataPoints = w.globals.dataPoints;
@@ -6365,6 +6366,10 @@
             if (barWidth < 1) {
               barWidth = 1;
             }
+          }
+
+          if (Array.isArray(this.barCtx.barOptions.columnWidth)) {
+            barWidth = this.barCtx.barOptions.columnWidth[realIndex];
           }
 
           zeroH = w.globals.gridHeight - this.barCtx.baseLineY[this.barCtx.yaxisIndex] - (this.barCtx.isReversed ? w.globals.gridHeight : 0) + (this.barCtx.isReversed ? this.barCtx.baseLineY[this.barCtx.yaxisIndex] * 2 : 0);
@@ -6842,7 +6847,7 @@
           }
 
           this.isReversed = w.config.yaxis[this.yaxisIndex] && w.config.yaxis[this.yaxisIndex].reversed;
-          var initPositions = this.barHelpers.initialPositions();
+          var initPositions = this.barHelpers.initialPositions(realIndex);
           y = initPositions.y;
           barHeight = initPositions.barHeight;
           yDivision = initPositions.yDivision;
@@ -23420,7 +23425,7 @@
             });
 
             if (w.config.dataLabels.enabled && dataLabels) {
-              _this.rotateToFitLabel(dataLabels, formattedText, x1, y1, x2, y2);
+              _this.rotateToFitLabel(dataLabels, fontSize, formattedText, x1, y1, x2, y2);
             }
 
             elSeries.add(elRect);
@@ -23493,11 +23498,11 @@
       }
     }, {
       key: "rotateToFitLabel",
-      value: function rotateToFitLabel(elText, text, x1, y1, x2, y2) {
+      value: function rotateToFitLabel(elText, fontSize, text, x1, y1, x2, y2) {
         var graphics = new Graphics(this.ctx);
-        var textRect = graphics.getTextRects(text); //if the label fits better sideways then rotate it
+        var textRect = graphics.getTextRects(text, fontSize); //if the label fits better sideways then rotate it
 
-        if (textRect.width + 5 > x2 - x1 && textRect.width <= y2 - y1) {
+        if (textRect.width + this.w.config.stroke.width + 5 > x2 - x1 && textRect.width <= y2 - y1) {
           var labelRotatingCenter = graphics.rotateAroundCenter(elText.node);
           elText.node.setAttribute('transform', "rotate(-90 ".concat(labelRotatingCenter.x, " ").concat(labelRotatingCenter.y, ")"));
         }
@@ -31066,15 +31071,18 @@
 
   function addResizeListener(el, fn) {
     var called = false;
-    var elRect = el.getBoundingClientRect();
 
-    if (el.style.display === 'none' || elRect.width === 0) {
-      // if elRect.width=0, the chart is not rendered at all
-      // (it has either display none or hidden in a different tab)
-      // fixes https://github.com/apexcharts/apexcharts.js/issues/2825
-      // fixes https://github.com/apexcharts/apexcharts.js/issues/2991
-      // fixes https://github.com/apexcharts/apexcharts.js/issues/2992
-      called = true;
+    if (el.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
+      var elRect = el.getBoundingClientRect();
+
+      if (el.style.display === 'none' || elRect.width === 0) {
+        // if elRect.width=0, the chart is not rendered at all
+        // (it has either display none or hidden in a different tab)
+        // fixes https://github.com/apexcharts/apexcharts.js/issues/2825
+        // fixes https://github.com/apexcharts/apexcharts.js/issues/2991
+        // fixes https://github.com/apexcharts/apexcharts.js/issues/2992
+        called = true;
+      }
     }
 
     var ro = new ResizeObserver(function (r) {
