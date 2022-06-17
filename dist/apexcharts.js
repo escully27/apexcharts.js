@@ -10852,6 +10852,11 @@
         }
 
         var _loop = function _loop(i) {
+          if (Array.isArray(w.config.plotOptions.bar.columnWidths)) {
+            colWidth = w.config.plotOptions.bar.columnWidths[i];
+            xPos = w.globals.padHorizontal + colWidthCb(0, colWidth) / 2 + w.config.xaxis.labels.offsetX;
+          }
+
           var x = xPos - colWidthCb(i, colWidth) / 2 + w.config.xaxis.labels.offsetX;
 
           if (i === 0 && labelsLen === 1 && colWidth / 2 === xPos && dataPoints === 1) {

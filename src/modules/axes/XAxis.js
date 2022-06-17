@@ -207,8 +207,15 @@ export default class XAxis {
       colWidth = w.globals.gridWidth / dataPoints
       xPos = xPos + colWidthCb(0, colWidth) + w.config.xaxis.labels.offsetX
     }
+    
 
     for (let i = 0; i <= labelsLen - 1; i++) {
+
+      if (Array.isArray(w.config.plotOptions.bar.columnWidths)) {
+        colWidth = w.config.plotOptions.bar.columnWidths[i]
+        xPos = w.globals.padHorizontal + colWidthCb(0, colWidth) / 2 + w.config.xaxis.labels.offsetX
+      }
+
       let x = xPos - colWidthCb(i, colWidth) / 2 + w.config.xaxis.labels.offsetX
 
       if (
