@@ -6891,13 +6891,10 @@
               }));
               barWidth = this.series[i][j] / this.invertedYRatio;
             } else {
-              if (Array.isArray(this.barOptions.columnWidth)) {
-                barWidth = this.barOptions.columnWidth[j];
-                console.log(" bar width ", j, barWidth, this.barOptions);
-              } // barWidth = (10 * (j+1))
+              if (Array.isArray(this.barOptions.columnWidths)) {
+                barWidth = this.barOptions.columnWidths[j];
+              }
 
-
-              console.log(" bar width ", j, barWidth, this.barOptions);
               paths = this.drawColumnPaths(_objectSpread2(_objectSpread2({}, pathsParams), {}, {
                 xDivision: xDivision,
                 barWidth: barWidth,

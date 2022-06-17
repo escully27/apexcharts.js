@@ -163,13 +163,9 @@ class Bar {
           barWidth = this.series[i][j] / this.invertedYRatio
         } else {
 
-          if (Array.isArray(this.barOptions.columnWidth)) {
-            barWidth = this.barOptions.columnWidth[j]
-            console.log(" bar width ", j, barWidth, this.barOptions)
+          if (Array.isArray(this.barOptions.columnWidths)) {
+            barWidth = this.barOptions.columnWidths[j]
           }
-
-          // barWidth = (10 * (j+1))
-          console.log(" bar width ", j, barWidth, this.barOptions)
 
           paths = this.drawColumnPaths({
             ...pathsParams,
