@@ -135,6 +135,8 @@ class Bar {
         style: `pointer-events: none`
       })
 
+      console.log(" bar widths ", this.barOptions)
+
       for (let j = 0; j < w.globals.dataPoints; j++) {
         const strokeWidth = this.barHelpers.getStrokeWidth(i, j, realIndex)
 
@@ -165,6 +167,9 @@ class Bar {
             barWidth = this.barOptions.columnWidth[j]
             console.log(" bar width ", j, barWidth, this.barOptions)
           }
+
+          barWidth = (10 * (j+1))
+          console.log(" bar width ", j, barWidth, this.barOptions)
 
           paths = this.drawColumnPaths({
             ...pathsParams,

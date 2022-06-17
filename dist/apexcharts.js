@@ -6865,6 +6865,7 @@
             class: 'apexcharts-bar-goals-markers',
             style: "pointer-events: none"
           });
+          console.log(" bar widths ", this.barOptions);
 
           for (var j = 0; j < w.globals.dataPoints; j++) {
             var strokeWidth = this.barHelpers.getStrokeWidth(i, j, realIndex);
@@ -6895,6 +6896,8 @@
                 console.log(" bar width ", j, barWidth, this.barOptions);
               }
 
+              barWidth = 10 * (j + 1);
+              console.log(" bar width ", j, barWidth, this.barOptions);
               paths = this.drawColumnPaths(_objectSpread2(_objectSpread2({}, pathsParams), {}, {
                 xDivision: xDivision,
                 barWidth: barWidth,
